@@ -180,50 +180,105 @@ header {
 }
 
 #filters-btn-container {
-  display: flex;
-  align-items: center;
-  gap: 12px;
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  background-color: #0c0d10;
+  border: 1px solid var(--clr-border);
+  border-radius: 9999px;
+  padding: 4px;
   margin-left: auto;
+  user-select: none;
+  overflow: hidden;
 }
 
-/* 3 Distinct Filter Colors */
-#filters-btn-container button:nth-child(1),
-#filters-btn-container button.completed {
-  color: var(--clr-completed);
-  border-color: var(--clr-completed-border);
+/* Sliding active pill indicator */
+#filters-btn-container .pill-glider {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 4px;
+  width: calc((100% - 8px) / 3);
+  border-radius: 9999px;
+  pointer-events: none;
+  z-index: 1;
+  transition: 
+    transform 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
-#filters-btn-container button:nth-child(1):hover,
-#filters-btn-container button.completed:hover {
+/* Buttons inside the pill container */
+#filters-btn-container button {
+  position: relative;
+  z-index: 2;
+  background: transparent;
+  border: none;
+  border-radius: 9999px;
+  padding: 6px 18px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--clr-text-muted);
+  box-shadow: none;
+  transform: none;
+  transition: color 0.25s ease;
+}
+
+#filters-btn-container button:hover {
+  background: transparent;
+  border: none;
+  color: var(--clr-text);
+  transform: none;
+}
+
+#filters-btn-container button:active {
+  transform: none;
+}
+
+/* State 1: Completed active */
+#filters-btn-container:has(button.completed.active) .pill-glider,
+#filters-btn-container:has(button:nth-of-type(1).active) .pill-glider {
+  transform: translateX(0%);
   background-color: var(--clr-completed-bg);
-  border-color: var(--clr-completed);
-  box-shadow: 0 0 10px rgba(52, 211, 153, 0.2);
+  border: 1px solid var(--clr-completed-border);
+  box-shadow: 0 0 12px rgba(52, 211, 153, 0.22);
 }
 
-#filters-btn-container button:nth-child(2),
-#filters-btn-container button.today {
-  color: var(--clr-today);
-  border-color: var(--clr-today-border);
+#filters-btn-container button.completed.active,
+#filters-btn-container button:nth-of-type(1).active {
+  color: var(--clr-completed);
+  font-weight: 600;
 }
 
-#filters-btn-container button:nth-child(2):hover,
-#filters-btn-container button.today:hover {
+/* State 2: Today active */
+#filters-btn-container:has(button.today.active) .pill-glider,
+#filters-btn-container:has(button:nth-of-type(2).active) .pill-glider {
+  transform: translateX(100%);
   background-color: var(--clr-today-bg);
-  border-color: var(--clr-today);
-  box-shadow: 0 0 10px rgba(251, 191, 36, 0.2);
+  border: 1px solid var(--clr-today-border);
+  box-shadow: 0 0 12px rgba(251, 191, 36, 0.22);
 }
 
-#filters-btn-container button:nth-child(3),
-#filters-btn-container button.upcoming {
-  color: var(--clr-upcoming);
-  border-color: var(--clr-upcoming-border);
+#filters-btn-container button.today.active,
+#filters-btn-container button:nth-of-type(2).active {
+  color: var(--clr-today);
+  font-weight: 600;
 }
 
-#filters-btn-container button:nth-child(3):hover,
-#filters-btn-container button.upcoming:hover {
+/* State 3: Upcoming active */
+#filters-btn-container:has(button.upcoming.active) .pill-glider,
+#filters-btn-container:has(button:nth-of-type(3).active) .pill-glider {
+  transform: translateX(200%);
   background-color: var(--clr-upcoming-bg);
-  border-color: var(--clr-upcoming);
-  box-shadow: 0 0 10px rgba(167, 139, 250, 0.2);
+  border: 1px solid var(--clr-upcoming-border);
+  box-shadow: 0 0 12px rgba(167, 139, 250, 0.22);
+}
+
+#filters-btn-container button.upcoming.active,
+#filters-btn-container button:nth-of-type(3).active {
+  color: var(--clr-upcoming);
+  font-weight: 600;
 }
 
 
@@ -240,12 +295,15 @@ aside {
   border-right: 1px solid var(--clr-border);
 }
 
+aside h2,
 aside h3 {
   text-align: center;
   font-size: 1rem;
   font-weight: 600;
   color: var(--clr-text-muted);
-  margin-top: 14px;
+  margin-top: 60px;
+  margin-bottom: 6px;
+  letter-spacing: 0.5px;
 }
 
 aside button {

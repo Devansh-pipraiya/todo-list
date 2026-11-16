@@ -11,18 +11,19 @@
   </head>
   <body>
     <header>
-      <h1 id="heading">what To DO?</h2>
+      <h2 id="heading">what To DO?</h2>
       <button id="add-task-btn">+ Add Task</button>
       <div id="filters-btn-container">
-        <button>Completed</button>
-        <button>Today</button>
-        <button>Upcoming</button>
+        <div class="pill-glider" aria-hidden="true"></div>
+        <button class="completed">Completed</button>
+        <button class="today active">Today</button>
+        <button class="upcoming">Upcoming</button>
       </div>
     </header>
     <aside>
       <button>All</button>
       <button>Inbox</button>
-      <h3>Projects</h3>
+      <h2>Projects</h2>
       <button>Work</button>
       <button id="add-projects-btn">+</button>
     </aside>
