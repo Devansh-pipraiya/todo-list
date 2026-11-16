@@ -18,3 +18,14 @@ filterContainer.addEventListener("click", (e) => {
   filterContainer.querySelector(".active")?.classList.remove("active");
   btn.classList.add("active");
 });
+
+// Sidebar project active toggle
+const aside = document.querySelector("aside");
+
+aside.addEventListener("click", (e) => {
+  const btn = e.target.closest("button");
+  if (!btn || btn.id === "add-projects-btn") return;
+
+  aside.querySelector(".active")?.classList.remove("active");
+  btn.classList.add("active");
+});

@@ -22,12 +22,34 @@
     </header>
     <aside>
       <button>All</button>
-      <button>Inbox</button>
+      <button class="active">Inbox</button>
       <h2>Projects</h2>
       <button>Work</button>
       <button id="add-projects-btn">+</button>
     </aside>
-    <main></main>
+    <main>
+      <div id="tasks-container" class="tasks-list">
+        <div class="task-card">
+          <button class="task-checkbox" aria-label="Toggle completion"></button>
+          <span class="task-title">task title</span>
+          <span class="task-due-date">due date</span>
+          <div class="task-actions">
+            <button class="task-btn-details" aria-label="View details" title="Details">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect width="18" height="18" x="3" y="3" rx="2"/>
+                <path d="M3 9h18"/>
+              </svg>
+            </button>
+            <button class="task-btn-delete" aria-label="Delete task" title="Delete">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 6 6 18"/>
+                <path d="m6 6 12 12"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
     <footer>
       <div class="footer-content">
         Copyright ©
