@@ -4,6 +4,22 @@ import "./css/styles.css";
 
 import { initModals } from "./modal.js";
 
+import { createTaskCard } from "./task-card.js";
+
+const task = {
+  title: "Complete JavaScript project",
+  description: "Finish the restaurant page",
+  createdOn: new Date(),
+  dueDate: new Date("2026-11-20"),
+  priority: "high",
+  notes: "Check the remaining sections",
+  checklist: [],
+};
+
+const card = createTaskCard(task);
+
+document.querySelector(".tasks-list").append(card);
+
 // Filter pill toggle
 const filterContainer = document.querySelector("#filters-btn-container");
 

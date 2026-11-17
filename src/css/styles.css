@@ -355,7 +355,7 @@ aside button.active {
 main {
   grid-area: main;
   background-color: var(--clr-bg);
-  padding: clamp(24px, 3.5vw, 48px) clamp(20px, 4vw, 56px);
+  padding: clamp(24px, 3.5vw, 70px) clamp(20px, 7vw, 140px);
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -366,19 +366,20 @@ main {
   flex-direction: column;
   gap: 14px;
   width: 100%;
-  max-width: 900px;
+  max-width: 850px;
 }
 
 .task-card {
   display: flex;
   align-items: center;
-  gap: 16px;
-  padding: 14px 22px;
+  gap: 14px;
+  padding: 12px 20px;
   background-color: var(--clr-surface);
   border: 1px solid var(--clr-border);
   border-radius: 16px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.2s ease, border-color 0.2s ease,
+    background-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .task-card:hover {
@@ -389,11 +390,11 @@ main {
 }
 
 .task-checkbox {
-  width: 24px;
-  height: 24px;
-  min-width: 24px;
-  border-radius: 50%;
-  border: 2px solid var(--clr-border-hover);
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  border-radius: 10px;
+  border: 3px solid var(--clr-border);
   background: transparent;
   padding: 0;
   cursor: pointer;
@@ -403,23 +404,59 @@ main {
 .task-checkbox:hover {
   border-color: var(--clr-completed);
   background-color: var(--clr-completed-bg);
-  transform: scale(1.08);
+  transform: translateY(-1px);
+}
+
+.task-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  gap: 2px;
 }
 
 .task-title {
   font-size: 1.05rem;
   font-weight: 500;
   color: var(--clr-text);
-  flex: 1;
+}
+
+.task-description {
+  font-size: 0.85rem;
+  color: var(--clr-text-muted);
+}
+
+.task-priority {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.task-priority svg {
+  width: 22px;
+  height: 22px;
+}
+
+.priority-high {
+  color: #f87171;
+}
+
+.priority-low {
+  color: #60a5fa;
+}
+
+.priority-normal {
+  visibility: hidden;
 }
 
 .task-due-date {
-  font-size: 0.88rem;
+  font-size: 0.82rem;
   color: var(--clr-text-muted);
-  padding: 5px 12px;
-  background-color: rgba(255, 255, 255, 0.04);
+  padding: 5px 10px;
+  background-color: rgba(255, 255, 255, 0.03);
   border: 1px solid var(--clr-border);
   border-radius: 8px;
+  white-space: nowrap;
 }
 
 .task-actions {
@@ -434,6 +471,17 @@ main {
   padding: 0;
   border-radius: 10px;
   color: var(--clr-text-muted);
+  background-color: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.task-actions button svg {
+  width: 15px;
+  height: 15px;
 }
 
 .task-btn-details:hover {

@@ -28,27 +28,7 @@
       <button id="add-projects-btn">+</button>
     </aside>
     <main>
-      <div id="tasks-container" class="tasks-list">
-        <div class="task-card">
-          <button class="task-checkbox" aria-label="Toggle completion"></button>
-          <span class="task-title">task title</span>
-          <span class="task-due-date">due date</span>
-          <div class="task-actions">
-            <button class="task-btn-details" aria-label="View details" title="Details">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect width="18" height="18" x="3" y="3" rx="2"/>
-                <path d="M3 9h18"/>
-              </svg>
-            </button>
-            <button class="task-btn-delete" aria-label="Delete task" title="Delete">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M18 6 6 18"/>
-                <path d="m6 6 12 12"/>
-              </svg>
-            </button>
-          </div>
-        </div>
-      </div>
+      <div id="tasks-container" class="tasks-list"></div>
     </main>
     <footer>
       <div class="footer-content">
@@ -75,17 +55,35 @@
       <form id="task-form" method="dialog">
         <div class="modal-header">
           <h3>Add New Task</h3>
-          <button type="button" id="close-modal-btn" class="btn-close-modal" aria-label="Close modal">✕</button>
+          <button
+            type="button"
+            id="close-modal-btn"
+            class="btn-close-modal"
+            aria-label="Close modal"
+          >
+            ✕
+          </button>
         </div>
 
         <div class="form-group">
           <label for="task-title">Title *</label>
-          <input type="text" id="task-title" name="title" placeholder="e.g. Finish chemistry assignment" required />
+          <input
+            type="text"
+            id="task-title"
+            name="title"
+            placeholder="e.g. Finish chemistry assignment"
+            required
+          />
         </div>
 
         <div class="form-group">
           <label for="task-desc">Description</label>
-          <textarea id="task-desc" name="description" rows="2" placeholder="Add more details..."></textarea>
+          <textarea
+            id="task-desc"
+            name="description"
+            rows="2"
+            placeholder="Add more details..."
+          ></textarea>
         </div>
 
         <div class="form-row">
@@ -113,7 +111,12 @@
 
         <div class="form-group">
           <label for="task-notes">Notes</label>
-          <textarea id="task-notes" name="notes" rows="2" placeholder="Additional notes or checklist..."></textarea>
+          <textarea
+            id="task-notes"
+            name="notes"
+            rows="2"
+            placeholder="Additional notes or checklist..."
+          ></textarea>
         </div>
 
         <div class="modal-actions">
@@ -127,13 +130,26 @@
       <form id="project-form" method="dialog">
         <div class="modal-header">
           <h3>Add New Project</h3>
-          <button type="button" id="close-project-modal-btn" class="btn-close-modal" aria-label="Close modal">✕</button>
+          <button
+            type="button"
+            id="close-project-modal-btn"
+            class="btn-close-modal"
+            aria-label="Close modal"
+          >
+            ✕
+          </button>
         </div>
 
         <div class="form-group">
           <label for="project-name-input">Project Name *</label>
-          <input type="text" id="project-name-input" name="projectName" placeholder="e.g. Study, Fitness, Personal" required />
-          <p id="project-error-msg" class="form-error" style="display: none;"></p>
+          <input
+            type="text"
+            id="project-name-input"
+            name="projectName"
+            placeholder="e.g. Study, Fitness, Personal"
+            required
+          />
+          <p id="project-error-msg" class="form-error" style="display: none"></p>
         </div>
 
         <div class="modal-actions">
