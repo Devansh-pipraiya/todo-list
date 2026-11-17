@@ -484,10 +484,11 @@ footer .github-logo:hover {
 
 
 /* ==========================================
-                 TASK MODAL
+                 MODALS (TASK & PROJECT)
    ========================================== */
 
-dialog#task-modal {
+dialog#task-modal,
+dialog#project-modal {
   background-color: var(--clr-panel);
   border: 1px solid var(--clr-border);
   border-radius: 20px;
@@ -499,7 +500,11 @@ dialog#task-modal {
   outline: none;
 }
 
-dialog#task-modal::backdrop {
+dialog#project-modal {
+  max-width: 440px;
+}
+
+dialog::backdrop {
   background-color: rgba(0, 0, 0, 0.65);
   backdrop-filter: blur(5px);
 }
@@ -576,6 +581,12 @@ dialog#task-modal::backdrop {
 .form-group textarea {
   resize: vertical;
   min-height: 60px;
+}
+
+.form-error {
+  color: #f87171;
+  font-size: 0.85rem;
+  margin-top: 6px;
 }
 
 .form-row {

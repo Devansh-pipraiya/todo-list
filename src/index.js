@@ -52,11 +52,13 @@ function populateProjectsDropdown() {
 addTaskBtn.addEventListener("click", () => {
   populateProjectsDropdown();
 
-  // Pre-select active sidebar project if matching
+  // Pre-select active sidebar project if matching (if "All", default to "inbox")
   const activeBtn = aside.querySelector(".active");
   const activeProjectName = activeBtn ? activeBtn.textContent.trim().toLowerCase() : "inbox";
-  if (projects[activeProjectName]) {
+  if (activeProjectName !== "all" && projects[activeProjectName]) {
     projectSelect.value = activeProjectName;
+  } else {
+    projectSelect.value = "inbox";
   }
 
   taskModal.showModal();
@@ -104,4 +106,57 @@ taskForm.addEventListener("submit", (e) => {
 
   taskForm.reset();
   taskModal.close();
+});
+
+// === Add Project Modal Logic === //
+const addProjectsBtn = document.querySelector("#add-projects-btn");
+const projectModal = document.querySelector("#project-modal");
+const projectForm = document.querySelector("#project-form");
+const closeProjectModalBtn = document.querySelector("#close-project-modal-btn");
+const cancelProjectModalBtn = document.querySelector("#cancel-project-modal-btn");
+const projectNameInput = document.querySelector("#project-name-input");
+const projectErrorMsg = document.querySelector("#project-error-msg");
+
+// Open project modal
+addProjectsBtn.addEventListener("click", () => {
+  projectForm.reset();
+  projectErrorMsg.style.display = "none";
+  projectErrorMsg.textContent = "";
+  projectModal.showModal();
+  projectNameInput.focus();
+});
+
+// Close project modal handlers
+closeProjectModalBtn.addEventListener("click", () => projectModal.close());
+cancelProjectModalBtn.addEventListener("click", () => projectModal.close());
+
+// Close on backdrop click
+projectModal.addEventListener("click", (e) => {
+  if (e.target === projectModal) {
+    projectModal.close();
+  }
+});
+
+// Submit project form - runs addProject with try...catch
+projectForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const rawName = projectNameInput.value.trim();
+  if (!rawName) return;
+
+  const normalizedName = rawName.toLowerCase();
+
+  try {
+    addProject(normalizedName);
+
+    // Insert new project button in sidebar right before the '+' button
+    const newProjectBtn = document.createElement("button");
+    newProjectBtn.textContent = rawName.charAt(0).toUpperCase() + rawName.slice(1);
+    aside.insertBefore(newProjectBtn, addProjectsBtn);
+
+    projectForm.reset();
+    projectModal.close();
+  } catch (err) {
+    projectErrorMsg.textContent = err.message;
+    projectErrorMsg.style.display = "block";
+  }
 });

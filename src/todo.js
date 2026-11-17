@@ -15,7 +15,7 @@ function addProject(name) {
     name,
     items: [],
   };
-  console.log(`new project created ${name}`);
+  console.log(`New Project Created ${name}`);
   console.table(projects);
   return projects[name];
 }
