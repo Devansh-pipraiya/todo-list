@@ -1,4 +1,4 @@
-export { projects, addTodo, addProject };
+export { projects, getProject, addTodo, addProject };
 
 const projects = {
   inbox: {

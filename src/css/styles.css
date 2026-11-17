@@ -484,6 +484,140 @@ footer .github-logo:hover {
 
 
 /* ==========================================
+                 TASK MODAL
+   ========================================== */
+
+dialog#task-modal {
+  background-color: var(--clr-panel);
+  border: 1px solid var(--clr-border);
+  border-radius: 20px;
+  color: var(--clr-text);
+  padding: 26px 30px;
+  max-width: 540px;
+  width: 90vw;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+  outline: none;
+}
+
+dialog#task-modal::backdrop {
+  background-color: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(5px);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 22px;
+}
+
+.modal-header h3 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--clr-text);
+}
+
+.btn-close-modal {
+  background: transparent;
+  border: none;
+  font-size: 1.25rem;
+  line-height: 1;
+  color: var(--clr-text-muted);
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 8px;
+  box-shadow: none;
+  transform: none;
+}
+
+.btn-close-modal:hover {
+  background-color: var(--clr-surface);
+  color: var(--clr-text);
+  transform: none;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--clr-text-muted);
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  background-color: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: 12px;
+  padding: 10px 14px;
+  color: var(--clr-text);
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-group input[type="date"] {
+  color-scheme: dark;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  border-color: var(--clr-add-task);
+  box-shadow: 0 0 0 2px rgba(74, 222, 128, 0.2);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 12px;
+  margin-bottom: 4px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.btn-cancel {
+  background-color: transparent;
+  border: 1px solid var(--clr-border);
+  color: var(--clr-text-muted);
+}
+
+.btn-cancel:hover {
+  background-color: var(--clr-surface);
+  color: var(--clr-text);
+  border-color: var(--clr-border-hover);
+}
+
+.btn-submit {
+  background-color: var(--clr-add-task);
+  color: #0c0d10;
+  font-weight: 600;
+  border: 1px solid transparent;
+}
+
+.btn-submit:hover {
+  background-color: #5cf092;
+  box-shadow: 0 0 14px rgba(74, 222, 128, 0.3);
+}
+
+
+/* ==========================================
             RESPONSIVE MEDIA QUERIES
    ========================================== */
 
