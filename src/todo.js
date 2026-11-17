@@ -1,4 +1,4 @@
-export { projects, getProject, addTodo, addProject };
+export { getProject, getProjectNames, addTodo, addProject };
 
 const projects = {
   inbox: {
@@ -6,6 +6,10 @@ const projects = {
     items: [],
   },
 };
+
+function getProjectNames() {
+  return Object.keys(projects);
+}
 
 function addProject(name) {
   if (name == undefined || projects[name]) {
