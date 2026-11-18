@@ -1,5 +1,6 @@
 import { createTaskCard } from "./task-card.js";
 import { deleteTodo, getProject, toggleTodoStatus } from "./todo.js";
+import { openTaskModal } from "./modal.js";
 
 const taskContainer = document.getElementById("tasks-container");
 let currProject = getProject("inbox");
@@ -13,13 +14,16 @@ function renderCard(todoArray) {
 }
 
 const taskActions = {
-  onToggleCheckbox: (task) => {
+  onToggleCheckbox(task) {
     toggleTodoStatus(task);
     console.log(`Task Completed ${task.completed}`);
     console.table(task);
     renderProject();
   },
-  onDelete: (task) => {
+  onEdit(task) {
+    openTaskModal(task);
+  },
+  onDelete(task) {
     deleteTodo(task, currProject);
     console.log(`Deleted => {${task.title}} from ${currProject.name}`);
     console.table(currProject.items);

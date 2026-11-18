@@ -75,4 +75,13 @@ const deleteTodo = (todoObj, project) => {
   }
 };
 
-export { getProject, getProjectNames, addTodo, addProject, toggleTodoStatus, deleteTodo };
+const editTodo = (todoObj, { title, description, dueDate, priority, notes }) => {
+  todoObj.title = title;
+  todoObj.description = description;
+  todoObj.dueDate = dueDate;
+  todoObj.priority = priority;
+  todoObj.notes = notes;
+  return todoObj;
+};
+
+export { getProject, getProjectNames, addTodo, addProject, toggleTodoStatus, deleteTodo, editTodo };
