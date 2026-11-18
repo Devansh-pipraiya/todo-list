@@ -1,7 +1,3 @@
-import { renderProject } from "./dom.js";
-
-export { getProject, getProjectNames, addTodo, addProject, toggleTodoStatus };
-
 const projects = {
   inbox: {
     name: "inbox",
@@ -70,3 +66,13 @@ function addTodo(
 }
 
 const toggleTodoStatus = (todoObj) => (todoObj.completed = !todoObj.completed);
+
+const deleteTodo = (todoObj, project) => {
+  const todoIndex = project.items.indexOf(todoObj);
+
+  if (todoIndex !== -1) {
+    project.items.splice(todoIndex, 1);
+  }
+};
+
+export { getProject, getProjectNames, addTodo, addProject, toggleTodoStatus, deleteTodo };

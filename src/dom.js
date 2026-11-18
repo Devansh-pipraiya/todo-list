@@ -1,5 +1,5 @@
 import { createTaskCard } from "./task-card.js";
-import { getProject, toggleTodoStatus } from "./todo.js";
+import { deleteTodo, getProject, toggleTodoStatus } from "./todo.js";
 
 const taskContainer = document.getElementById("tasks-container");
 let currProject = getProject("inbox");
@@ -17,6 +17,12 @@ const taskActions = {
     toggleTodoStatus(task);
     console.log(`Task Completed ${task.completed}`);
     console.table(task);
+    renderProject();
+  },
+  onDelete: (task) => {
+    deleteTodo(task, currProject);
+    console.log(`Deleted => {${task.title}} from ${currProject.name}`);
+    console.table(currProject.items);
     renderProject();
   },
 };
