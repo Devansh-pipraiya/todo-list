@@ -3,7 +3,17 @@ export { getProject, getProjectNames, addTodo, addProject };
 const projects = {
   inbox: {
     name: "inbox",
-    items: [],
+    items: [
+      {
+        title: "Add a Todo",
+        description: 'Click on "Add Task" button to create a Todo',
+        createdOn: new Date(),
+        dueDate: new Date(),
+        priority: "high",
+        notes: "",
+        checklist: [],
+      },
+    ],
   },
 };
 

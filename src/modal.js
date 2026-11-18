@@ -1,3 +1,4 @@
+import { renderProject } from "./dom.js";
 import { getProject, getProjectNames, addTodo, addProject } from "./todo.js";
 
 export function initModals() {
@@ -74,7 +75,7 @@ function initTaskModal() {
         priority,
         notes,
       },
-      projectName
+      projectName,
     );
 
     console.log(`Task added to "${projectName}":`, newTask);
@@ -82,6 +83,7 @@ function initTaskModal() {
 
     taskForm.reset();
     taskModal.close();
+    renderProject();
   });
 }
 
