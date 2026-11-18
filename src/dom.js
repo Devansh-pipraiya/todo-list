@@ -1,5 +1,5 @@
 import { createTaskCard } from "./task-card.js";
-import { getProject } from "./todo.js";
+import { getProject, toggleTodoStatus } from "./todo.js";
 
 const taskContainer = document.getElementById("tasks-container");
 let currProject = getProject("inbox");
@@ -7,10 +7,19 @@ let currProject = getProject("inbox");
 // takes array of todo objects creates todo card and insert to DOM
 function renderCard(todoArray) {
   for (const obj of todoArray) {
-    const todoTaskCard = createTaskCard(obj);
+    const todoTaskCard = createTaskCard(obj, taskActions);
     taskContainer.prepend(todoTaskCard);
   }
 }
+
+const taskActions = {
+  onToggleCheckbox: (task) => {
+    toggleTodoStatus(task);
+    console.log(`Task Completed ${task.completed}`);
+    console.table(task);
+    renderProject();
+  },
+};
 
 // clears DOM and Render Cards in Current Project Tab
 function renderProject() {

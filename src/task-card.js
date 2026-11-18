@@ -34,8 +34,13 @@ function createTaskCard(task, callbacks = {}) {
   checkbox.type = "button";
   checkbox.setAttribute("aria-label", "Toggle completion");
 
+  if (task.completed) {
+    checkbox.classList.add("done");
+    card.classList.add("completed");
+  }
+
   checkbox.addEventListener("click", () => {
-    callbacks.onToggle?.(task);
+    callbacks.onToggleCheckbox?.(task, card);
   });
 
   // Task information

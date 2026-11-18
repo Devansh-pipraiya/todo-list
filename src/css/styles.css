@@ -389,6 +389,24 @@ main {
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.32);
 }
 
+.task-card.completed {
+  opacity: 0.55;
+}
+
+.task-card.completed:hover {
+  opacity: 0.8;
+}
+
+.task-card.completed .task-title {
+  text-decoration: line-through;
+  color: var(--clr-text-muted);
+}
+
+.task-card.completed .task-description {
+  text-decoration: line-through;
+  opacity: 0.7;
+}
+
 .task-checkbox {
   width: 30px;
   height: 30px;
@@ -399,6 +417,21 @@ main {
   padding: 0;
   cursor: pointer;
   transition: all 0.2s ease;
+}
+
+.task-checkbox.done {
+  background-color: var(--clr-completed);
+  border-color: var(--clr-completed);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23101114' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
+  background-size: 16px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.task-checkbox.done:hover {
+  background-color: var(--clr-completed);
+  border-color: var(--clr-completed);
+  filter: brightness(1.1);
 }
 
 .task-checkbox:hover {

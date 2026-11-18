@@ -1,4 +1,6 @@
-export { getProject, getProjectNames, addTodo, addProject };
+import { renderProject } from "./dom.js";
+
+export { getProject, getProjectNames, addTodo, addProject, toggleTodoStatus };
 
 const projects = {
   inbox: {
@@ -11,7 +13,7 @@ const projects = {
         dueDate: new Date(),
         priority: "high",
         notes: "",
-        checklist: [],
+        completed: false,
       },
     ],
   },
@@ -46,7 +48,7 @@ function addTodo(
     dueDate = null,
     priority = "normal",
     notes = "",
-    checklist = [],
+    completed = false,
   } = {},
   projectName = "inbox",
 ) {
@@ -60,9 +62,11 @@ function addTodo(
     dueDate,
     priority,
     notes,
-    checklist,
+    completed,
   };
 
   projects[projectName].items.push(item);
   return item;
 }
+
+const toggleTodoStatus = (todoObj) => (todoObj.completed = !todoObj.completed);
