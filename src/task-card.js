@@ -1,8 +1,7 @@
-export { createTaskCard };
-
+// Namespace needed for creating dynamic SVG elements in HTML
 const SVG_NS = "http://www.w3.org/2000/svg";
 
-// Reusable SVG creation function
+// Helper to build reusable SVG icons from path data strings
 function createIcon(paths) {
   const svg = document.createElementNS(SVG_NS, "svg");
 
@@ -24,11 +23,13 @@ function createIcon(paths) {
   return svg;
 }
 
-function createTaskCard(task, callbacks = {}) {
+// Factory function: creates and returns an interactive task card DOM element
+export function createTaskCard(task, callbacks = {}) {
+  // Root card container
   const card = document.createElement("div");
   card.classList.add("task-card");
 
-  // Checkbox
+  // 1. Completion status checkbox button
   const checkbox = document.createElement("button");
   checkbox.classList.add("task-checkbox");
   checkbox.type = "button";
@@ -43,7 +44,7 @@ function createTaskCard(task, callbacks = {}) {
     callbacks.onToggleCheckbox?.(task, card);
   });
 
-  // Task information
+  // 2. Task information (title & description)
   const info = document.createElement("div");
   info.classList.add("task-info");
 
@@ -57,7 +58,7 @@ function createTaskCard(task, callbacks = {}) {
 
   info.append(title, description);
 
-  // Priority arrow
+  // 3. Priority indicator arrow
   const priority = document.createElement("span");
   priority.classList.add("task-priority");
 
@@ -74,7 +75,7 @@ function createTaskCard(task, callbacks = {}) {
 
   priority.append(createIcon(priorityPaths[priorityLevel] || priorityPaths.normal));
 
-  // Due date
+  // 4. Formatted due date display
   const dueDate = document.createElement("span");
   dueDate.classList.add("task-due-date");
 
@@ -85,7 +86,7 @@ function createTaskCard(task, callbacks = {}) {
       })
     : "Not due";
 
-  // Actions
+  // 5. Action buttons container (Edit & Delete)
   const actions = document.createElement("div");
   actions.classList.add("task-actions");
 
@@ -117,7 +118,7 @@ function createTaskCard(task, callbacks = {}) {
 
   actions.append(editBtn, deleteBtn);
 
-  // Assemble card
+  // Assemble all parts into the root card and return
   card.append(checkbox, info, priority, dueDate, actions);
 
   return card;

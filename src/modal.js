@@ -1,4 +1,4 @@
-import { renderProject } from "./dom.js";
+import { renderProject, getCurrentProject } from "./dom.js";
 import { getProject, getProjectNames, addTodo, addProject, editTodo } from "./todo.js";
 
 // Cached DOM elements for Task Modal
@@ -25,11 +25,8 @@ let currentEditingTask = null;
 // ==========================================
 
 function getActiveProjectName() {
-  const activeBtn = document.querySelector("aside .active");
-  const activeProjectName = activeBtn ? activeBtn.textContent.trim().toLowerCase() : "inbox";
-  return activeProjectName !== "all" && getProject(activeProjectName) !== "No Project Found"
-    ? activeProjectName
-    : "inbox";
+  const current = getCurrentProject();
+  return current?.name && current.name !== "all" ? current.name : "inbox";
 }
 
 function populateProjectsDropdown() {
