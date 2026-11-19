@@ -38,13 +38,7 @@ function getProject(projectName) {
 }
 
 function addTodo(
-  {
-    title,
-    description = "",
-    dueDate = null,
-    priority = "normal",
-    notes = "",
-  } = {},
+  { title, description = "", dueDate = null, priority = "normal", notes = "" } = {},
   projectName = "inbox",
 ) {
   if (!title) throw new Error("addTodo: title is required");
@@ -76,7 +70,24 @@ const deleteTodo = (todoObj) => {
   }
 };
 
-const editTodo = (todoObj, { title, description, dueDate, priority, notes }) => {
+const editTodo = (todoObj, { title, description, dueDate, priority, notes, projectName }) => {
+  // If projectName changed, move task from old project to new project
+  if (projectName && projectName !== todoObj.projectName) {
+    const oldProject = getProject(todoObj.projectName);
+    if (oldProject && oldProject !== "No Project Found") {
+      const index = oldProject.items.indexOf(todoObj);
+      if (index !== -1) {
+        oldProject.items.splice(index, 1);
+      }
+    }
+
+    todoObj.projectName = projectName;
+    const newProject = getProject(projectName);
+    if (newProject && newProject !== "No Project Found") {
+      newProject.items.push(todoObj);
+    }
+  }
+
   todoObj.title = title;
   todoObj.description = description;
   todoObj.dueDate = dueDate;

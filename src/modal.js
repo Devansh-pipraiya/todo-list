@@ -98,19 +98,20 @@ function initTaskModal() {
     const title = titleInput.value.trim();
     if (!title) return;
 
+    const projectName = projectSelect.value;
     const taskData = {
       title,
       description: descInput.value.trim(),
       dueDate: dueInput.value ? new Date(dueInput.value) : null,
       priority: prioritySelect.value,
       notes: notesInput.value.trim(),
+      projectName,
     };
 
     if (currentEditingTask) {
       editTodo(currentEditingTask, taskData);
       console.log("Task edited:", currentEditingTask);
     } else {
-      const projectName = projectSelect.value;
       const newTask = addTodo(taskData, projectName);
       console.log(`Task added to "${projectName}":`, newTask);
     }
