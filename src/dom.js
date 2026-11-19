@@ -1,5 +1,5 @@
 import { createTaskCard } from "./task-card.js";
-import { deleteTodo, getProject, toggleTodoStatus } from "./todo.js";
+import { deleteTodo, getProject, getProjectNames, toggleTodoStatus } from "./todo.js";
 import { openTaskModal } from "./modal.js";
 
 // ==========================================
@@ -41,9 +41,8 @@ const taskActions = {
   },
 
   onDelete(task) {
-    deleteTodo(task, currProject);
-    console.log(`Deleted => {${task.title}} from ${currProject.name}`);
-    console.table(currProject.items);
+    deleteTodo(task);
+    console.log(`Deleted => {${task.title}} from ${task.projectName}`);
     renderProject();
   },
 };
@@ -51,6 +50,11 @@ const taskActions = {
 // ==========================================
 // Rendering Logic
 // ==========================================
+
+// Helper to get a flat array of all tasks across all projects
+function getAllTasks() {
+  return getProjectNames().flatMap((name) => getProject(name).items);
+}
 
 /**
  * Creates task cards and inserts them into the DOM
@@ -67,7 +71,8 @@ function renderCards(todoArray) {
  */
 function renderProject() {
   taskContainer.innerHTML = "";
-  renderCards(currProject.items);
+  const tasks = currProject === "all" ? getAllTasks() : currProject.items;
+  renderCards(tasks);
 }
 
 // ==========================================
@@ -93,8 +98,13 @@ aside.addEventListener("click", (e) => {
   aside.querySelector(".active")?.classList.remove("active");
   btn.classList.add("active");
 
-  currProject = getProject(e.target.innerText.toLowerCase());
-  if (currProject === "No Project Found") return;
+  const selectedName = btn.textContent.trim().toLowerCase();
+  if (selectedName === "all") {
+    currProject = "all";
+  } else {
+    currProject = getProject(selectedName);
+    if (currProject === "No Project Found") return;
+  }
 
   renderProject();
 });

@@ -24,6 +24,7 @@ let currentEditingTask = null;
 // Helper Functions
 // ==========================================
 
+// If there's no current project, or it has no name, or its name is 'all', just return 'inbox'
 function getActiveProjectName() {
   const current = getCurrentProject();
   return current?.name && current.name !== "all" ? current.name : "inbox";
@@ -49,9 +50,8 @@ function populateProjectsDropdown() {
 export function openTaskModal(task = null) {
   currentEditingTask = task;
 
-  // 1. Refresh project options and set active selection
+  // 1. Refresh project options
   populateProjectsDropdown();
-  projectSelect.value = getActiveProjectName();
 
   // 2. Set mode-specific UI and values
   if (task) {
@@ -63,6 +63,7 @@ export function openTaskModal(task = null) {
     dueInput.value = task.dueDate ? new Date(task.dueDate).toISOString().split("T")[0] : "";
     prioritySelect.value = task.priority || "normal";
     notesInput.value = task.notes || "";
+    projectSelect.value = task.projectName || getActiveProjectName();
   } else {
     modalHeading.textContent = "Add New Task";
     submitTaskBtn.textContent = "Add Task";

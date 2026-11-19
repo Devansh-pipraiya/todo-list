@@ -10,6 +10,7 @@ const projects = {
         priority: "high",
         notes: "",
         completed: false,
+        projectName: "inbox",
       },
     ],
   },
@@ -40,11 +41,9 @@ function addTodo(
   {
     title,
     description = "",
-    createdOn = new Date(),
     dueDate = null,
     priority = "normal",
     notes = "",
-    completed = false,
   } = {},
   projectName = "inbox",
 ) {
@@ -54,11 +53,12 @@ function addTodo(
   const item = {
     title,
     description,
-    createdOn,
+    createdOn: new Date(),
     dueDate,
     priority,
     notes,
-    completed,
+    completed: false,
+    projectName,
   };
 
   projects[projectName].items.push(item);
@@ -67,7 +67,8 @@ function addTodo(
 
 const toggleTodoStatus = (todoObj) => (todoObj.completed = !todoObj.completed);
 
-const deleteTodo = (todoObj, project) => {
+const deleteTodo = (todoObj) => {
+  const project = getProject(todoObj.projectName);
   const todoIndex = project.items.indexOf(todoObj);
 
   if (todoIndex !== -1) {
