@@ -1,3 +1,4 @@
+import { format, isToday, isTomorrow, isValid, isYesterday } from "date-fns";
 // Namespace needed for creating dynamic SVG elements in HTML
 const SVG_NS = "http://www.w3.org/2000/svg";
 
@@ -78,13 +79,16 @@ export function createTaskCard(task, callbacks = {}) {
   // 4. Formatted due date display
   const dueDate = document.createElement("span");
   dueDate.classList.add("task-due-date");
+  dueDate.textContent = task.dueDate ? getFormatedDate(task.dueDate) : "Not due";
 
-  dueDate.textContent = task.dueDate
-    ? new Date(task.dueDate).toLocaleDateString("en-IN", {
-        day: "numeric",
-        month: "short",
-      })
-    : "Not due";
+  function getFormatedDate(date) {
+    const rawDate = new Date(date);
+    if (!isValid(rawDate)) return "Not Valid Date";
+    if (isToday(rawDate)) return "Today";
+    if (isTomorrow(rawDate)) return "Tomorrow";
+    if (isYesterday(rawDate)) return "Yesterday";
+    return format(rawDate, "d MMM");
+  }
 
   // 5. Action buttons container (Edit & Delete)
   const actions = document.createElement("div");
