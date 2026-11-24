@@ -407,6 +407,42 @@ main {
   gap: 14px;
   width: 100%;
   max-width: 850px;
+  height: 100%;
+  flex: 1;
+}
+
+.delete-project-btn {
+  margin-top: auto;
+  align-self: flex-end;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 18px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #f87171;
+  background-color: rgba(248, 113, 113, 0.08);
+  border: 1px solid rgba(248, 113, 113, 0.35);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.delete-project-btn:hover {
+  color: #ffffff;
+  background-color: #ef4444;
+  border-color: #ef4444;
+  box-shadow: 0 4px 14px rgba(239, 68, 68, 0.35);
+  transform: translateY(-1px);
+}
+
+.delete-project-btn:active {
+  transform: translateY(1px);
+}
+
+.delete-project-btn svg {
+  width: 15px;
+  height: 15px;
 }
 
 .task-card {

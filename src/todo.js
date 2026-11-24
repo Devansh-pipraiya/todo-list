@@ -90,4 +90,19 @@ const editTodo = (todoObj, { title, description, dueDate, priority, notes, proje
   return todoObj;
 };
 
-export { getProject, getProjectNames, addTodo, addProject, toggleTodoStatus, deleteTodo, editTodo };
+function deleteProject(projectName) {
+  if (getProject(projectName) === "No Project Found") return;
+  delete projects[projectName];
+  updateStorage(projects);
+}
+
+export {
+  deleteProject,
+  getProject,
+  getProjectNames,
+  addTodo,
+  addProject,
+  toggleTodoStatus,
+  deleteTodo,
+  editTodo,
+};
