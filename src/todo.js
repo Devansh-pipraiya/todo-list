@@ -1,20 +1,6 @@
-const projects = {
-  inbox: {
-    name: "inbox",
-    items: [
-      {
-        title: "Add a Todo",
-        description: 'Click on "Add Task" button to create a Todo',
-        createdOn: new Date(),
-        dueDate: new Date(),
-        priority: "high",
-        notes: "",
-        completed: false,
-        projectName: "inbox",
-      },
-    ],
-  },
-};
+import { updateStorage, initProjects } from "./storage.js";
+
+const projects = initProjects();
 
 function getProjectNames() {
   return Object.keys(projects);
@@ -30,6 +16,7 @@ function addProject(name) {
   };
   console.log(`New Project Created ${name}`);
   console.table(projects);
+  updateStorage(projects);
   return projects[name];
 }
 
@@ -56,10 +43,14 @@ function addTodo(
   };
 
   projects[projectName].items.push(item);
+  updateStorage(projects);
   return item;
 }
 
-const toggleTodoStatus = (todoObj) => (todoObj.completed = !todoObj.completed);
+const toggleTodoStatus = (todoObj) => {
+  todoObj.completed = !todoObj.completed;
+  updateStorage(projects);
+};
 
 const deleteTodo = (todoObj) => {
   const project = getProject(todoObj.projectName);
@@ -68,6 +59,7 @@ const deleteTodo = (todoObj) => {
   if (todoIndex !== -1) {
     project.items.splice(todoIndex, 1);
   }
+  updateStorage(projects);
 };
 
 const editTodo = (todoObj, { title, description, dueDate, priority, notes, projectName }) => {
@@ -93,6 +85,8 @@ const editTodo = (todoObj, { title, description, dueDate, priority, notes, proje
   todoObj.dueDate = dueDate;
   todoObj.priority = priority;
   todoObj.notes = notes;
+
+  updateStorage(projects);
   return todoObj;
 };
 
