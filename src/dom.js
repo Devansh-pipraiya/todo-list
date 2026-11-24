@@ -11,8 +11,7 @@ const filterContainer = document.querySelector("#filters-btn-container");
 const aside = document.querySelector("aside");
 
 let currProject = getProject("inbox");
-let currFilter =
-  filterContainer.querySelector(".active")?.textContent.trim().toLowerCase() || "today";
+let currFilter = filterContainer.querySelector(".active")?.dataset.filter || "no-filter";
 
 // ==========================================
 // State Getters
@@ -48,8 +47,34 @@ const taskActions = {
 };
 
 // ==========================================
-// Rendering Logic
+// Rendering & Filtering Logic
 // ==========================================
+
+// Filters an array of tasks according to the active currFilter
+function filter(array) {
+  switch (currFilter) {
+    case "completed":
+      return array.filter((obj) => obj.completed === true);
+
+    case "today":
+      return array
+        .filter((obj) => obj.dueDate)
+        .filter((obj) => obj.dueDate.toDateString() === new Date().toDateString());
+
+    case "upcoming":
+      return array
+        .filter((obj) => obj.dueDate > new Date() || obj.dueDate == null)
+        .sort((a, b) => new Date(b.dueDate) - new Date(a.dueDate));
+  }
+}
+
+// Resets active filter UI pill and state back to default
+function resetFilter() {
+  const resetBtn = filterContainer.querySelector(".reset");
+  filterContainer.querySelector(".active")?.classList.remove("active");
+  resetBtn.classList.add("active");
+  currFilter = "no-filter";
+}
 
 // Helper to get a flat array of all tasks across all projects
 function getAllTasks() {
@@ -71,7 +96,8 @@ function renderCards(todoArray) {
  */
 function renderProject() {
   taskContainer.innerHTML = "";
-  const tasks = currProject === "all" ? getAllTasks() : currProject.items;
+  let tasks = currProject === "all" ? getAllTasks() : currProject.items;
+  if (currFilter !== "no-filter") tasks = filter(tasks);
   renderCards(tasks);
 }
 
@@ -79,7 +105,7 @@ function renderProject() {
 // Event Listeners (Navigation & Filters)
 // ==========================================
 
-// Filter pill toggle (Completed, Today, Upcoming)
+// Filter pill toggle (Completed, Today, Upcoming, Reset)
 filterContainer.addEventListener("click", (e) => {
   const btn = e.target.closest("button");
   if (!btn) return;
@@ -87,7 +113,8 @@ filterContainer.addEventListener("click", (e) => {
   filterContainer.querySelector(".active")?.classList.remove("active");
   btn.classList.add("active");
 
-  currFilter = btn.textContent.trim().toLowerCase();
+  currFilter = btn.dataset.filter;
+  renderProject();
 });
 
 // Sidebar project selection
@@ -105,7 +132,7 @@ aside.addEventListener("click", (e) => {
     currProject = getProject(selectedName);
     if (currProject === "No Project Found") return;
   }
-
+  resetFilter();
   renderProject();
 });
 

@@ -86,6 +86,10 @@ h1, h2, h3, h4, h5, h6 {
   --clr-upcoming: #a78bfa;
   --clr-upcoming-bg: rgba(167, 139, 250, 0.12);
   --clr-upcoming-border: rgba(167, 139, 250, 0.4);
+
+  --clr-reset: #60a5fa;
+  --clr-reset-bg: rgba(96, 165, 250, 0.12);
+  --clr-reset-border: rgba(96, 165, 250, 0.4);
 }
 
 
@@ -189,9 +193,10 @@ header {
 
 /* Pill Track */
 #filters-btn-container {
+  --reset-w: 42px;
   position: relative;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 1fr) var(--reset-w);
   background-color: #0c0d10;
   border: 1px solid var(--clr-border);
   border-radius: 9999px;
@@ -206,13 +211,14 @@ header {
   position: absolute;
   top: 5px;
   bottom: 5px;
-  left: 5px;
-  width: calc((100% - 10px) / 3);
+  left: calc(100% - 5px - var(--reset-w));
+  width: var(--reset-w);
   border-radius: 9999px;
   pointer-events: none;
   z-index: 1;
   transition: 
-    transform 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+    left 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+    width 0.3s cubic-bezier(0.25, 1, 0.5, 1),
     background-color 0.25s ease,
     border-color 0.25s ease,
     box-shadow 0.25s ease;
@@ -225,13 +231,20 @@ header {
   background: transparent;
   border: none;
   border-radius: 9999px;
-  padding: 8px 20px;
+  padding: 8px 18px;
   font-size: 0.95rem;
   font-weight: 500;
   color: var(--clr-text-muted);
   box-shadow: none;
   transform: none;
   transition: color 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#filters-btn-container button.reset {
+  padding: 0;
 }
 
 #filters-btn-container button:hover {
@@ -248,7 +261,8 @@ header {
 /* State 1: Completed active */
 #filters-btn-container:has(button.completed.active) .pill-glider,
 #filters-btn-container:has(button:nth-of-type(1).active) .pill-glider {
-  transform: translateX(0%);
+  left: 5px;
+  width: calc((100% - 10px - var(--reset-w)) / 3);
   background-color: var(--clr-completed-bg);
   border: 1px solid var(--clr-completed-border);
   box-shadow: 0 0 14px rgba(52, 211, 153, 0.28);
@@ -263,7 +277,8 @@ header {
 /* State 2: Today active */
 #filters-btn-container:has(button.today.active) .pill-glider,
 #filters-btn-container:has(button:nth-of-type(2).active) .pill-glider {
-  transform: translateX(100%);
+  left: calc(5px + (100% - 10px - var(--reset-w)) / 3);
+  width: calc((100% - 10px - var(--reset-w)) / 3);
   background-color: var(--clr-today-bg);
   border: 1px solid var(--clr-today-border);
   box-shadow: 0 0 14px rgba(251, 191, 36, 0.28);
@@ -278,7 +293,8 @@ header {
 /* State 3: Upcoming active */
 #filters-btn-container:has(button.upcoming.active) .pill-glider,
 #filters-btn-container:has(button:nth-of-type(3).active) .pill-glider {
-  transform: translateX(200%);
+  left: calc(5px + ((100% - 10px - var(--reset-w)) / 3) * 2);
+  width: calc((100% - 10px - var(--reset-w)) / 3);
   background-color: var(--clr-upcoming-bg);
   border: 1px solid var(--clr-upcoming-border);
   box-shadow: 0 0 14px rgba(167, 139, 250, 0.28);
@@ -288,6 +304,30 @@ header {
 #filters-btn-container button:nth-of-type(3).active {
   color: var(--clr-upcoming);
   font-weight: 600;
+}
+
+/* State 4: Reset active */
+#filters-btn-container:has(button.reset.active) .pill-glider,
+#filters-btn-container:has(button:nth-of-type(4).active) .pill-glider {
+  left: calc(100% - 5px - var(--reset-w));
+  width: var(--reset-w);
+  background-color: var(--clr-reset-bg);
+  border: 1px solid var(--clr-reset-border);
+  box-shadow: 0 0 14px rgba(96, 165, 250, 0.28);
+}
+
+#filters-btn-container button.reset.active,
+#filters-btn-container button:nth-of-type(4).active {
+  color: var(--clr-reset);
+  font-weight: 600;
+}
+
+#filters-btn-container button.reset svg {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+#filters-btn-container button.reset:hover svg {
+  transform: rotate(-90deg);
 }
 
 
