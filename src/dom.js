@@ -102,6 +102,34 @@ function renderProject() {
 }
 
 // ==========================================
+// Project Tabs Logic (Sidebar)
+// ==========================================
+
+/**
+ * Creates a project button element for the sidebar
+ */
+function createProjectBtn(projectName) {
+  const projectBtn = document.createElement("button");
+  projectBtn.classList.add("custom-project-btn");
+  projectBtn.textContent = projectName.charAt(0).toUpperCase() + projectName.slice(1);
+  return projectBtn;
+}
+
+/**
+ * Renders custom project tabs in the sidebar from stored project names
+ */
+function renderProjectTabs() {
+  const addProjectsBtn = document.querySelector("#add-projects-btn");
+  aside.querySelectorAll(".custom-project-btn").forEach((btn) => btn.remove());
+
+  for (const project of getProjectNames()) {
+    if (project === "inbox") continue;
+    const projectBtn = createProjectBtn(project);
+    aside.insertBefore(projectBtn, addProjectsBtn);
+  }
+}
+
+// ==========================================
 // Event Listeners (Navigation & Filters)
 // ==========================================
 
@@ -139,4 +167,4 @@ aside.addEventListener("click", (e) => {
 // ==========================================
 // Exports
 // ==========================================
-export { renderProject, getCurrentProject, getCurrentFilter };
+export { createProjectBtn, renderProjectTabs, renderProject, getCurrentProject, getCurrentFilter };

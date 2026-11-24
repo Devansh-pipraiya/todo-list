@@ -1,5 +1,5 @@
-import { renderProject, getCurrentProject } from "./dom.js";
-import { getProject, getProjectNames, addTodo, addProject, editTodo } from "./todo.js";
+import { renderProject, getCurrentProject, createProjectBtn } from "./dom.js";
+import { getProjectNames, addTodo, addProject, editTodo } from "./todo.js";
 
 // Cached DOM elements for Task Modal
 const taskModal = document.querySelector("#task-modal");
@@ -164,9 +164,7 @@ function initProjectModal() {
     try {
       addProject(normalizedName);
 
-      // Insert new project button in sidebar right before the '+' button
-      const newProjectBtn = document.createElement("button");
-      newProjectBtn.textContent = rawName.charAt(0).toUpperCase() + rawName.slice(1);
+      const newProjectBtn = createProjectBtn(rawName);
       aside.insertBefore(newProjectBtn, addProjectsBtn);
 
       projectForm.reset();
