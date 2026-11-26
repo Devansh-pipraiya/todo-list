@@ -1,6 +1,6 @@
-# 🎯 Title: todo-list
+# 🎯 Todo list
 
-### A project-based todo app built with vanilla JavaScript
+### A todo app that organizes your tasks into projects
 
 **Project Overview:**
 This project is part of **[The Odin Project](https://www.theodinproject.com)** course, built to practice:
@@ -18,8 +18,7 @@ This project is part of **[The Odin Project](https://www.theodinproject.com)** c
 
 ## Preview 👀
 
-<!-- Add a screenshot or GIF here, for example: -->
-<!-- [![Demo](./screenshots/preview.png)](https://devansh-pipraiya.github.io/todo-list/) -->
+[![Demo](./todo-demo.gif)](https://devansh-pipraiya.github.io/todo-list/)
 
 ## 🚀 Features
 
@@ -36,7 +35,7 @@ This project is part of **[The Odin Project](https://www.theodinproject.com)** c
 
 ## 🛠️ Built With
 
-- HTML5, CSS3, JavaScript (ES modules)
+- HTML5, CSS3, Vanilla JavaScript (ES modules)
 - [webpack](https://webpack.js.org/) (`html-webpack-plugin`, `style-loader`, `css-loader`, `webpack-dev-server`)
 - [date-fns](https://date-fns.org/)
 
